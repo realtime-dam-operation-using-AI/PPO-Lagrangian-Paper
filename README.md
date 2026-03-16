@@ -11,27 +11,29 @@ We release these configs to improve **implementation transparency and reproducib
 ## What is included
 
 ```
-Data warehouse/
-	AppE_ExtremeStressEval_C2Square_R1_Episode2.xlsx
-	DRL_training_config/
-		A1_Correction_R*_config.py
-		A2_Penalty_R*_config.py
-		A3_Lagrangian_R*_config.py
-		B2_WaterMask_R*_config.py
-		B3_FullMask_R*_config.py
-		C2_Square_R*_config.py
-		C3_Sqrt_R*_config.py
-		C4_Cubic_R*_config.py
-		C5_Exp_R*_config.py
-		C6_Log_R*_config.py
+AppE_ExtremeStressEval_C2Square_R1_Episode2.xlsx
+AppF_CrossReservoir_DecisionLogs_Public_Xiluodu_Xiangjiaba.xlsx
+DRL_training_config/
+	A1_Correction_R*_config.py
+	A2_Penalty_R*_config.py
+	A3_Lagrangian_R*_config.py
+	B2_WaterMask_R*_config.py
+	B3_FullMask_R*_config.py
+	C2_Square_R*_config.py
+	C3_Sqrt_R*_config.py
+	C4_Cubic_R*_config.py
+	C5_Exp_R*_config.py
+	C6_Log_R*_config.py
 ```
 
 Each `*_config.py` is a self-contained DI-engine style configuration (Python + `EasyDict`). Most configs also include an optional `__main__` entry so they can be launched directly.
 
-The file `AppE_ExtremeStressEval_C2Square_R1_Episode2.xlsx` is the supplementary stress-test evaluation table reported in Appendix E (single run example). It contains two sheets:
+The `AppE_ExtremeStressEval_C2Square_R1_Episode2.xlsx` is the supplementary stress-test evaluation table reported in Appendix E (single run example). It contains two sheets:
 
 - `三峡`: daily scheduling-process log (time series records);
 - `汇总`: key aggregate indicators used in the appendix summary table.
+
+The `AppF_CrossReservoir_DecisionLogs_Public_Xiluodu_Xiangjiaba.xlsx` contains the cross-reservoir decision logs reported in Appendix F.
 
 ## How to interpret filenames
 
@@ -126,17 +128,16 @@ If you have the corresponding codebase available, you can typically launch train
 
 - **Historical inflow data** are subject to institutional access restrictions and are **not** included here.
 - The configs reference an inflow file name (e.g., `ResInflowEnhan.xlsx`) expected by the training environment.
-- The supplementary appendix-level stress-test output table is released as:
+- The supplementary appendix-level output tables are released as:
 	- `AppE_ExtremeStressEval_C2Square_R1_Episode2.xlsx`
+	- `AppF_CrossReservoir_DecisionLogs_Public_Xiluodu_Xiangjiaba.xlsx`
 - **Trained model checkpoints/weights** and full experiment outputs can be obtained from the corresponding author upon reasonable request (see the manuscript Data availability statement).
 
-## Intended GitHub release
+## GitHub release
 
-We plan to publish these configuration files at:
+These configuration files and supplementary data are published at:
 
 - https://github.com/lovemevol/PPO-Lagrangian-Paper
-
-If you are preparing the GitHub repository, you can copy this README content to the repository root `README.md` (recommended), or keep it under `Data warehouse/` and add a short root README linking here.
 
 ## Contact
 
