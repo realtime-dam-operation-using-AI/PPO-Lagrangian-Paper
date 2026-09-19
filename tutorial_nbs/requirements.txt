@@ -1,0 +1,15 @@
+# Dependencies of DRL_training_config/*_config.py (DI-engine 0.5.3 pins gym==0.25.1, numpy<2, setuptools<=66.1.1).
+# Install into the "ppo_rl" conda env (Python 3.10) with:  bash tutorial_nbs/setup_env.sh
+setuptools<=66.1.1
+wheel
+numpy<2
+gym==0.25.1
+easydict>=1.9
+pytz
+DI-engine==0.5.3
+# tutorial extras
+pandas
+openpyxl
+matplotlib
+jupyter
+ipykernel

@@ -2,6 +2,8 @@
 
 # DRL training configuration files (for public release)
 
+> 🇰🇷 한국어 버전: [README_kor.md](README_kor.md)
+
 This folder contains the **training configuration files** used in the experiments of our manuscript:
 
 > **A Two-Layer Safe Reinforcement Learning Framework for Multi-Constraint Reservoir Operation: Integrating Action Masking and Lagrangian Dual Method**
@@ -30,8 +32,8 @@ Each `*_config.py` is a self-contained DI-engine style configuration (Python + `
 
 The `AppE_ExtremeStressEval_C2Square_R1_Episode2.xlsx` is the supplementary stress-test evaluation table reported in Appendix E (single run example). It contains two sheets:
 
-- `三峡`: daily scheduling-process log (time series records);
-- `汇总`: key aggregate indicators used in the appendix summary table.
+- Sheet 1, `Three Gorges`: daily scheduling-process log (time series records);
+- Sheet 2, `Summary`: key aggregate indicators used in the appendix summary table.
 
 The `AppF_CrossReservoir_DecisionLogs_Public_Xiluodu_Xiangjiaba.xlsx` contains the cross-reservoir decision logs reported in Appendix F.
 
@@ -123,6 +125,10 @@ If you have the corresponding codebase available, you can typically launch train
 	- `python A3_Lagrangian_R1_config.py --seed 0`
 
 `R1`–`R5` correspond to the five independent runs; you can use any five seeds (we recommend `0,1,2,3,4` unless you maintain a different seed list).
+
+## Tutorial
+
+`tutorial_nbs/` contains five Jupyter notebooks (config anatomy, toy reservoir environment, action masking / non-linear mapping, PPO vs PPO-Lagrangian, appendix data) and a `setup_env.sh` that builds the `ppo_rl` conda environment with every dependency the configs import. See `tutorial_nbs/README.md`.
 
 ## Data and model weights
 
