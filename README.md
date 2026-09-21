@@ -128,7 +128,7 @@ If you have the corresponding codebase available, you can typically launch train
 
 ## Tutorial
 
-`tutorial_nbs/` contains five Jupyter notebooks (config anatomy, toy reservoir environment, action masking / non-linear mapping, PPO vs PPO-Lagrangian, appendix data) and a `setup_env.sh` that builds the `ppo_rl` conda environment with every dependency the configs import. See `tutorial_nbs/README.md`.
+`tutorial_nbs/` contains five Jupyter notebooks (config anatomy, toy reservoir environment, action masking / non-linear mapping, PPO vs PPO-Lagrangian, appendix data) and a `setup_env.sh` that builds the `ppo_rl` conda environment with every dependency the configs import. See `tutorial_nbs/README.md`. `hourly_operation_nbs/` extends this to hourly decision support with flood/drought priority, a monthly guide band and operator preferences (see its README).
 
 ## Data and model weights
 

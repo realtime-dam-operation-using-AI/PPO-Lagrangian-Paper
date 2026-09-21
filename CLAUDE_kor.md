@@ -13,6 +13,7 @@
 - `README.md` / `README_kor.md` — 논문 실험과 설정 파일의 공식 대응표. 설정 파일을 수정하기 전에 먼저 읽을 것.
 - `DRL_training_config/description.md` / `description_kor.md` — 변형별 설정 파일 설명과 단독 실행이 불가능한 이유.
 - `tutorial_nbs/` — Jupyter 노트북 5개와 `toy_reservoir.py`. 논문의 메커니즘(제약 처리 타입, 액션 마스크, 비선형 매핑, 제약 비용)을 재현한 작은 대체 환경입니다. 각 노트북 설명은 해당 폴더의 README 참고. `operation_guide_kor.md` 는 실제 댐 적용 절차서입니다.
+- `hourly_operation_nbs/` — 시간 단위 의사결정 지원 확장(`hourly_reservoir.py`, `ppo_lagrangian.py`, 노트북 5개). 운영기관 요구사항(홍수 > 가뭄 우선, 발전 비제약, 월별 운영수위 밴드, 운영자 목표 위치, 72h hourly + daily 예측) 기반. 노트북 03 이 `models/policy.pt` 를 쓰고 04, 05 가 필요로 함.
 
 설정 파일 자체에 대한 빌드, 린트, 테스트 도구는 없습니다. 설정 파일은 **이 저장소에서 실행할 수 없습니다.** `sys.path`를 `../../../`, `../../../../`로 조작하여 `DI-engine/agent/reservoir_single_agent/<folder>/` 위치에 있다고 가정하며, `agent.tool_function.ppo_lagrangian`, `ding`, 비공개 저수지 환경을 import 합니다. 유입량 데이터(`ResInflowEnhan.xlsx`)와 학습된 가중치도 포함되어 있지 않습니다. 단독 실행이 되도록 import나 경로를 "고치려" 하지 마십시오. 이 파일들은 실제로 학습에 사용된 설정을 그대로 기록한 것으로 공개된 것입니다.
 
@@ -37,6 +38,7 @@ cd tutorial_nbs && jupyter nbconvert --to notebook --execute --inplace --Execute
 - 노트북 01 은 `agent`, `agent.tool_function`, `agent.tool_function.ppo_lagrangian` stub 모듈을 `sys.modules` 에 주입한 뒤 `runpy.run_path(..., run_name="__tutorial__")` 로 실제 설정 파일을 로드하여 `__main__` 학습 실행을 건너뜁니다. 설정 파일을 수정하지 말고 이 패턴을 재사용하십시오.
 - 노트북 02–04 는 노트북 폴더의 `toy_reservoir.py` 를 import(`sys.path.insert(0, ".")`)하므로 작업 디렉터리를 `tutorial_nbs` 로 두고 실행해야 합니다. 출력이 저장된 상태이므로 `toy_reservoir.py` 를 바꾸면 재실행하십시오.
 - 노트북 마크다운은 한국어, 코드·주석·열 이름은 영어입니다.
+- `hourly_operation_nbs/` 도 같은 환경을 씁니다. 마스크는 구간 교집합 + 최근접 경계 완화(층을 버리지 않음)입니다. `groupby(...).level` 은 pandas 의 `GroupBy.level` 과 충돌하므로 `g["level"]` 을 쓰십시오.
 
 ## 설정 파일의 구조
 
@@ -72,4 +74,4 @@ B, C 변형은 `USE_PPO_LAGRANGIAN=True`를 유지합니다. 즉, 일반 PPO가 
 
 - 50개 파일이 거의 동일하므로 공통 내용을 바꿀 때는 모든 파일에 적용해야 합니다 (예: `DRL_training_config/*.py`에 `sed` 적용). 그 다음 파일 한 쌍을 `diff`하여 `filename_without_ext`와 의도한 스위치만 다른지 확인하십시오.
 - 변형의 스위치가 바뀌면 `README.md`, `README_kor.md`, 그리고 위 스위치 표(`CLAUDE.md`와 `CLAUDE_kor.md` 모두)를 함께 갱신하십시오.
-- 문서는 영문판과 한국어판(`README.md` ↔ `README_kor.md`, `CLAUDE.md` ↔ `CLAUDE_kor.md`, `description.md` ↔ `description_kor.md`, `tutorial_nbs/README.md` ↔ `tutorial_nbs/README_kor.md`, `tutorial_nbs/operation_guide.md` ↔ `operation_guide_kor.md`)을 쌍으로 관리합니다. 한쪽을 수정하면 반드시 다른 쪽도 같은 내용으로 수정하십시오.
+- 문서는 영문판과 한국어판(`README.md` ↔ `README_kor.md`, `CLAUDE.md` ↔ `CLAUDE_kor.md`, `description.md` ↔ `description_kor.md`, `tutorial_nbs/README.md` ↔ `tutorial_nbs/README_kor.md`, `tutorial_nbs/operation_guide.md` ↔ `operation_guide_kor.md`, `hourly_operation_nbs/README.md` ↔ `README_kor.md`)을 쌍으로 관리합니다. 한쪽을 수정하면 반드시 다른 쪽도 같은 내용으로 수정하십시오.

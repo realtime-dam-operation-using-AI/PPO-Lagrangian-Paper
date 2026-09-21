@@ -126,7 +126,7 @@ PPO-Lagrangian 메커니즘은 `policy.lagrangian` 블록으로 제어됩니다.
 
 ## 튜토리얼
 
-`tutorial_nbs/` 에는 Jupyter 노트북 5개(설정 파일 해부, toy 저수지 환경, 액션 마스킹/비선형 매핑, PPO vs PPO-Lagrangian, 부록 데이터)와 설정 파일이 import 하는 모든 의존성을 갖춘 `ppo_rl` conda 환경을 만드는 `setup_env.sh` 가 있습니다. `tutorial_nbs/README_kor.md` 를 참고하세요.
+`tutorial_nbs/` 에는 Jupyter 노트북 5개(설정 파일 해부, toy 저수지 환경, 액션 마스킹/비선형 매핑, PPO vs PPO-Lagrangian, 부록 데이터)와 설정 파일이 import 하는 모든 의존성을 갖춘 `ppo_rl` conda 환경을 만드는 `setup_env.sh` 가 있습니다. `tutorial_nbs/README_kor.md` 를 참고하세요. `hourly_operation_nbs/` 는 이를 홍수/가뭄 우선순위, 월별 운영수위 밴드, 운영자 선호를 반영한 시간 단위 의사결정 지원으로 확장한 것입니다(해당 README 참고).
 
 ## 데이터 및 모델 가중치
 

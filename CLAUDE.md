@@ -13,6 +13,7 @@ Public supplementary material for the manuscript *"A Two-Layer Safe Reinforcemen
 - `README.md` / `README_kor.md` — the authoritative mapping from paper experiments to config files. Read it before editing configs.
 - `DRL_training_config/description.md` / `description_kor.md` — per-variant explanation of the config files and why they cannot run standalone.
 - `tutorial_nbs/` — five Jupyter notebooks plus `toy_reservoir.py`, a small stand-in environment that reproduces the paper's mechanisms (constraint types, action masks, non-linear mapping, constraint cost). Its README explains each notebook; `operation_guide.md` is the procedure for applying the framework to a real dam.
+- `hourly_operation_nbs/` — hourly decision-support extension (`hourly_reservoir.py`, `ppo_lagrangian.py`, five notebooks) built to an agency's requirements: flood > drought priority, no hydropower constraint, monthly guide band, operator target position, 72 h hourly + daily forecasts. Notebook 03 writes `models/policy.pt`; 04 and 05 need it.
 
 There is no build, lint, or test tooling for the configs themselves. The configs are **not runnable from this repo**: they `sys.path`-hack to `../../../` and `../../../../` expecting to live at `DI-engine/agent/reservoir_single_agent/<folder>/`, and they import `agent.tool_function.ppo_lagrangian`, `ding`, and the private reservoir environment. Inflow data (`ResInflowEnhan.xlsx`) and trained weights are also not included. Do not try to "fix" the imports or paths to make them run standalone; they are released as a faithful record of what was trained.
 
@@ -37,6 +38,7 @@ cd tutorial_nbs && jupyter nbconvert --to notebook --execute --inplace --Execute
 - Notebook 01 loads the real config files by injecting stub modules for `agent`, `agent.tool_function` and `agent.tool_function.ppo_lagrangian` into `sys.modules` and running the file with `runpy.run_path(..., run_name="__tutorial__")` so the `__main__` training launch is skipped. Reuse that pattern rather than editing the configs.
 - Notebooks 02–04 import `toy_reservoir.py` from the notebook's own directory (`sys.path.insert(0, ".")`), so run them with `tutorial_nbs` as the working directory. They are stored with outputs; re-execute after changing `toy_reservoir.py`.
 - Notebook markdown is in Korean; code, comments and column names are English.
+- `hourly_operation_nbs/` uses the same env. Its mask is interval intersection with nearest-boundary relaxation (never drop a layer); `groupby(...).level` collides with pandas' `GroupBy.level`, use `g["level"]`.
 
 ## How the configs are structured
 
@@ -72,4 +74,4 @@ Other points that matter when reading or explaining a config:
 
 - Because the 50 files are near-identical, any change to shared content must be applied to all of them (e.g. with `sed` across `DRL_training_config/*.py`), then verified with `diff` between a pair of files so that only `filename_without_ext` and the intended switches differ.
 - Keep `README.md`, `README_kor.md`, and the switch table above (in both `CLAUDE.md` and `CLAUDE_kor.md`) in sync if a variant's switches change.
-- Docs are maintained as English/Korean pairs (`README.md` ↔ `README_kor.md`, `CLAUDE.md` ↔ `CLAUDE_kor.md`, `description.md` ↔ `description_kor.md`, `tutorial_nbs/README.md` ↔ `tutorial_nbs/README_kor.md`, `tutorial_nbs/operation_guide.md` ↔ `operation_guide_kor.md`). When editing one, apply the same change to the other.
+- Docs are maintained as English/Korean pairs (`README.md` ↔ `README_kor.md`, `CLAUDE.md` ↔ `CLAUDE_kor.md`, `description.md` ↔ `description_kor.md`, `tutorial_nbs/README.md` ↔ `tutorial_nbs/README_kor.md`, `tutorial_nbs/operation_guide.md` ↔ `operation_guide_kor.md`, `hourly_operation_nbs/README.md` ↔ `README_kor.md`). When editing one, apply the same change to the other.
